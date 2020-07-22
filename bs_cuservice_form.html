@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="stylesheet" href="src/css/style.css" />
+    <script src="src/js/jquery-3.3.1.min.js"></script>
+    <script src="src/js/Jscript.js"></script>
+
+    <title>環宇商務中心</title>
+  </head>
+
+  <body class="fx fx_center">
+    <form id="HYForm" class="wid100 main_container fx fx_jcenter fx_wrap">
+      <div class="front_info">
+        <br />
+      </div>
+
+      <div class="sect_box wid100">
+        <div class="sec_title">這裡是這個功能的Title</div>
+
+        <div class="wid100 fx fx_mobile_wrap">
+          <div class="input_box">
+            <div class="input_title">資格序號</div>
+            <input type="text" id="serialNumber" name="serialNumber " />
+            <div class="error" id="serialNumber_er"></div>
+          </div>
+          <div class="space"></div>
+          <div class="input_box">
+            <div class="input_title">身分證字號</div>
+            <input type="text" id="IdentityId" name="IdentityId" />
+            <div class="error" id="IdentityId_er"></div>
+          </div>
+        </div>
+
+        <div class="wid100 fx fx_mobile_wrap">
+          <div class="input_box">
+            <div class="input_title">姓名全碼</div>
+            <input type="text" id="fullName" name="fullName" />
+            <div class="error" id="fullName_er"></div>
+          </div>
+          <div class="space"></div>
+          <div class="input_box">
+            <div class="input_title">性別</div>
+            <select name="sex" id="sex">
+              <option value="" disabled selected> </option>
+              <option value="M">男</option>
+              <option value="F">女</option>
+            </select>
+            <div class="error" id="sex_er"></div>
+          </div>
+        </div>
+
+        <div class="wid100 fx fx_mobile_wrap">
+          <div class="input_box">
+            <div class="input_title">卡號(前6)</div>
+            <input
+              type="text"
+              pattern="\d*"
+              maxlength="6"
+              id="cardFront6"
+              name="cardFront6"
+            />
+            <div class="error" id="cardFront6_er"></div>
+          </div>
+          <div class="space"></div>
+          <div class="input_box">
+            <div class="input_title">卡號(後4)</div>
+            <input
+              type="text"
+              pattern="\d*"
+              maxlength="4"
+              id="cardBack4"
+              name="cardBack4"
+            />
+            <div class="error" id="cardBack4_er"></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="cus_submit" class="submit">送出</div>
+    </form>
+  </body>
+</html>

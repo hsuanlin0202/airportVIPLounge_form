@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="stylesheet" href="src/css/style.css" />
+    <script src="src/js/jquery-3.3.1.min.js"></script>
+    <script src="src/js/Jscript.js"></script>
+
+    <title>環宇商務中心</title>
+  </head>
+
+  <body class="fx fx_center">
+    <form id="HYForm" class="wid100 main_container fx fx_jcenter fx_wrap">
+      <div class="wid100 fx fx_center title fx_wrap">
+        <div class="wid100 fx fx_acenter fx_between fx_nowrap">
+          <img
+            src="src/img/logo.png"
+            style="width: 48%; max-width: 300px; margin: 20px 5px;"
+          />
+          <img
+            src="src/img/logo_carplus.svg"
+            style="width: 48%; max-width: 300px; margin: 20px 5px;"
+          />
+        </div>
+        <p class="wid100 fx fx_center">貴賓預約服務單</p>
+      </div>
+
+      <div class="front_info">
+        親愛的貴賓您好:<br />
+        感謝您的預約，煩請您協助填妥以下貴賓之資料，並於資料確認完整無誤後送出資料，我們將盡速為您辦理出
+        / 入境申請手續。<br />
+        如您尚有其它疑問，也歡迎致電台灣區免付費專線：0800-268-999我們將竭誠為您服務，謝謝。<br />
+      </div>
+
+      <!--班機資料-->
+      <div class="sect_box wid100">
+        <div class="sec_title">班機資料</div>
+
+        <div class="wid100 fx fx_mobile_wrap">
+          <div class="input_box">
+            <div class="input_title" style="color: white;">1</div>
+            <select id="entry_type" onchange="flight_info()">
+              <option value="departure">出境</option>
+              <option value="arrival">入境</option>
+              <option value="transfer">轉機</option>
+            </select>
+            <div class="error"></div>
+          </div>
+          <div class="space"></div>
+          <div class="input_box">
+            <div class="input_title">日期</div>
+            <div class="wid100 fx fx_nowrap">
+              <select id="entry_date_y">
+                <option value=""></option>
+              </select>
+              <div class="slash">/</div>
+              <select id="entry_date_m">
+                <option value=""></option>
+              </select>
+              <div class="slash">/</div>
+              <select id="entry_date_d">
+                <option value=""></option>
+              </select>
+            </div>
+            <input type="hidden" id="entrydate" />
+            <div class="error" id="entrydate_er"></div>
+            <input type="hidden" name="DepartureDate" id="DepartureDate" />
+            <input type="hidden" name="ArrivalDate" id="ArrivalDate" />
+            <input
+              type="hidden"
+              name="TransferDepartureDate"
+              id="TransferDepartureDate"
+            />
+            <input
+              type="hidden"
+              name="TransferArrivalDate"
+              id="TransferArrivalDate"
+            />
+          </div>
+        </div>
+        <div class="wid100 fx fx_mobile_wrap" id="departure_box">
+          <div class="input_box">
+            <div class="input_title">出境班機號碼</div>
+            <input
+              type="text"
+              id="DepartureFlightNo"
+              name="DepartureFlightNo"
+            />
+            <div class="error" id="DepartureFlightNo_er"></div>
+          </div>
+          <div class="space"></div>
+          <div class="input_box">
+            <div class="input_title">出境班機時間</div>
+            <div class="wid100 fx fx_nowrap">
+              <select id="departure_time_h">
+                <option value=""></option>
+              </select>
+              <div class="slash">:</div>
+              <select id="departure_time_m">
+                <option value=""></option>
+              </select>
+            </div>
+            <input type="hidden" id="departuretime" />
+            <div class="error" id="departuretime_er"></div>
+          </div>
+        </div>
+
+        <div class="wid100 fx fx_mobile_wrap" id="arrival_box">
+          <div class="input_box">
+            <div class="input_title">入境班機號碼</div>
+            <input type="text" id="ArrivalFlightNo" name="ArrivalFlightNo" />
+            <input
+              type="hidden"
+              id="TransferDepartureFlightNo"
+              name="TransferDepartureFlightNo"
+            />
+            <input
+              type="hidden"
+              id="TransferArrivalFlightNo"
+              name="TransferArrivalFlightNo"
+            />
+            <div class="error" id="ArrivalFlightNo_er"></div>
+          </div>
+          <div class="space"></div>
+          <div class="input_box">
+            <div class="input_title">入境班機時間</div>
+            <div class="wid100 fx fx_nowrap">
+              <select id="arrival_time_h">
+                <option value=""></option>
+              </select>
+              <div class="slash">:</div>
+              <select id="arrival_time_m">
+                <option value=""></option>
+              </select>
+            </div>
+            <input type="hidden" id="arrivaltime" />
+            <div class="error" id="arrivaltime_er"></div>
+          </div>
+        </div>
+
+        <div class="wid100 fx fx_mobile_wrap" id="entryVIP_box">
+          <div class="input_box">
+            <div class="input_title">預計抵達環宇商務中心時間</div>
+            <div class="wid100 fx fx_nowrap">
+              <select id="vip_time_h">
+                <option value=""></option>
+              </select>
+              <div class="slash">:</div>
+              <select id="vip_time_m">
+                <option value=""></option>
+              </select>
+            </div>
+            <input
+              type="hidden"
+              id="EstimatedArrivalHYTime"
+              name="EstimatedArrivalHYTime"
+            />
+            <div class="error" id="EstimatedArrivalHYTime_er"></div>
+          </div>
+          <div class="wid100"></div>
+        </div>
+      </div>
+
+      <!--貴賓基本資料-->
+      <div class="sect_box wid100">
+        <div class="sec_title">貴賓基本資料</div>
+        <div class="input_box">
+          <div class="input_title">護照上中文姓/名</div>
+          <input type="text" id="VipNameTW" name="VipNameTW" />
+          <div class="error" id="VipNameTW_er"></div>
+        </div>
+
+        <div class="wid100 fx fx_mobile_wrap">
+          <div class="input_box">
+            <div class="input_title">護照上英文姓</div>
+            <input type="text" id="VipLastNameEN" name="VipLastNameEN" />
+            <div class="error" id="VipLastNameEN_er"></div>
+          </div>
+          <div class="space"></div>
+          <div class="input_box">
+            <div class="input_title">護照上英文名</div>
+            <input type="text" id="VipFirstNameEN" name="VipFirstNameEN" />
+            <div class="error" id="VipFirstNameEN_er"></div>
+          </div>
+        </div>
+
+        <div class="wid100 fx fx_mobile_wrap">
+          <div class="input_box">
+            <div class="input_title">國籍</div>
+            <input type="text" id="VipCountry" name="VipCountry" />
+            <div class="error" id="VipCountry_er"></div>
+          </div>
+          <div class="space"></div>
+          <div class="input_box">
+            <div class="input_title">護照號碼</div>
+            <input type="text" id="VipPassportNo" name="VipPassportNo" />
+            <div class="error" id="VipPassportNo_er"></div>
+          </div>
+        </div>
+
+        <div class="input_box">
+          <div class="input_title">護照有效期限</div>
+          <div class="wid100 fx fx_nowrap">
+            <select id="passport_exp_y">
+              <option value=""></option>
+            </select>
+            <div class="slash">/</div>
+            <select id="passport_exp_m">
+              <option value=""></option>
+            </select>
+            <div class="slash">/</div>
+            <select id="passport_exp_d">
+              <option value=""></option>
+            </select>
+          </div>
+          <input type="hidden" id="PassportExpDate" name="PassportExpDate" />
+          <div class="error" id="PassportExpDate_er"></div>
+        </div>
+
+        <div class="input_box">
+          <div class="input_title">出生年/月/日</div>
+          <div class="wid100 fx fx_nowrap">
+            <select id="vipbirthday_y">
+              <option value=""></option>
+            </select>
+            <div class="slash">/</div>
+            <select id="vipbirthday_m">
+              <option value=""></option>
+            </select>
+            <div class="slash">/</div>
+            <select id="vipbirthday_d">
+              <option value=""></option>
+            </select>
+          </div>
+          <input type="hidden" id="VipBirthday" name="VipBirthday" />
+          <div class="error" id="VipBirthday_er"></div>
+        </div>
+
+        <div class="wid100 fx fx_mobile_wrap">
+          <div class="input_box">
+            <div class="input_title">性別</div>
+            <select name="VipSex" id="VipSex">
+              <option value="" disabled selected> </option>
+              <option value="M">男</option>
+              <option value="F">女</option>
+            </select>
+            <div class="error" id="VipSex_er"></div>
+          </div>
+          <div class="space"></div>
+          <div class="input_box">
+            <div class="input_title">行動電話</div>
+            <input
+              type="text"
+              pattern="\d*"
+              id="VipMobilePhone"
+              name="VipMobilePhone"
+              placeholder="e.g.0912345678"
+            />
+            <div class="error" id="VipMobilePhone_er"></div>
+          </div>
+        </div>
+
+        <div class="wid100 fx fx_mobile_wrap">
+          <div class="input_box">
+            <div class="input_title">市話</div>
+            <input
+              type="text"
+              id="VipTel"
+              name="VipTel"
+              placeholder="e.g.02-12345678"
+            />
+            <div class="error" id="VipTel_er"></div>
+          </div>
+          <div class="space"></div>
+          <div class="input_box">
+            <div class="input_title">傳真</div>
+            <input
+              type="text"
+              id="VipFax"
+              name="VipFax"
+              placeholder="e.g.02-12345678"
+            />
+            <div class="error" id="VipFax_er"></div>
+          </div>
+        </div>
+
+        <div class="input_box">
+          <div class="input_title">E-mail</div>
+          <input type="text" id="VipEmail" name="VipEmail" />
+          <div class="error" id="VipEmail_er"></div>
+        </div>
+      </div>
+
+      <!--聯絡人資料-->
+      <div class="sect_box wid100">
+        <div class="sec_title">聯絡人資料</div>
+
+        <div class="input_box">
+          <div class="radio_box fx fx_acenter fx_nowrap" style="height: 32px;">
+            <input
+              type="radio"
+              name="ContactIsSelf"
+              value="Y"
+              id="vip"
+              checked
+            />
+            <label for="vip" style="margin-right: 10px;"> 貴賓本人</label>
+            <input type="radio" name="ContactIsSelf" value="N" id="nonvip" />
+            <label for="nonvip"> 非貴賓本人</label>
+          </div>
+          <div class="error"></div>
+        </div>
+
+        <div class="wid100" id="contact_info">
+          <div class="wid100 fx fx_mobile_wrap">
+            <div class="input_box">
+              <div class="input_title">姓名</div>
+              <input type="text" id="ContactName" name="ContactName" />
+              <div class="error" id="ContactName_er"></div>
+            </div>
+            <div class="space"></div>
+            <div class="input_box">
+              <div class="input_title">職稱</div>
+              <input type="text" id="ContactJobTitle" name="ContactJobTitle" />
+              <div class="error" id="ContactJobTitle_er"></div>
+            </div>
+          </div>
+
+          <div class="wid100 fx fx_mobile_wrap">
+            <div class="input_box">
+              <div class="input_title">公司名稱</div>
+              <input
+                type="text"
+                id="ContactCompanyName"
+                name="ContactCompanyName"
+              />
+              <div class="error" id="ContactCompanyName_er"></div>
+            </div>
+            <div class="space"></div>
+            <div class="input_box">
+              <div class="input_title">付款方式</div>
+              <select id="PaymentMethod" name="PaymentMethod">
+                <option value="0">現金</option>
+                <option value="1">刷卡</option>
+                <option value="2">匯款</option>
+              </select>
+              <div class="error" id="PaymentMethod_er"></div>
+            </div>
+          </div>
+
+          <div class="wid100 fx fx_mobile_wrap">
+            <div class="input_box">
+              <div class="input_title">發票</div>
+              <div
+                class="radio_box fx fx_acenter fx_nowrap"
+                style="height: 32px;"
+              >
+                <input type="radio" name="invoice" value="2" id="inv2" />
+                <label for="inv2" style="margin-right: 10px;"> 二聯發票</label>
+                <input type="radio" name="invoice" value="3" id="inv3" />
+                <label for="inv3"> 三聯發票</label>
+              </div>
+              <input type="hidden" name="InvoiceType" />
+              <div class="error" id="InvoiceType_er"></div>
+            </div>
+            <div class="space"></div>
+            <div class="input_box">
+              <div class="input_title">統一編號</div>
+              <input type="text" id="TaxIdNumber" name="TaxIdNumber" />
+              <div class="error" id="taxidnumber_er"></div>
+            </div>
+          </div>
+
+          <div class="input_box">
+            <div class="input_title">發票寄送地址(含郵遞區號)</div>
+            <input type="text" id="InvoiceAddress" name="InvoiceAddress" />
+            <div class="error" id="InvoiceAddress_er"></div>
+          </div>
+
+          <div class="wid100 fx fx_mobile_wrap">
+            <div class="input_box">
+              <div class="input_title">行動電話</div>
+              <input
+                type="text"
+                id="ContactMobilePhone"
+                name="ContactMobilePhone"
+              />
+              <div class="error" id="ContactMobilePhone_er"></div>
+            </div>
+            <div class="space"></div>
+            <div class="input_box">
+              <div class="input_title">市話</div>
+              <input type="text" id="ContactTel" name="ContactTel" />
+              <div class="error" id="ContactTel_er"></div>
+            </div>
+          </div>
+
+          <div class="wid100 fx fx_mobile_wrap">
+            <div class="input_box">
+              <div class="input_title">傳真</div>
+              <input type="text" id="ContactFax" name="ContactFax" />
+              <div class="error" id="ContactFax_er"></div>
+            </div>
+            <div class="space"></div>
+            <div class="input_box">
+              <div class="input_title">E-mail</div>
+              <input type="text" id="ContactEmail" name="ContactEmail" />
+              <div class="error" id="ContactEmail_er"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--接送駕駛資料-->
+      <div class="sect_box wid100">
+        <div class="sec_title">接送駕駛資料</div>
+
+        <div class="input_box">
+          <div class="input_title">姓名</div>
+          <input type="text" id="DriverName" name="DriverName" />
+          <div class="error" id="DriverName_er"></div>
+        </div>
+
+        <div class="input_box">
+          <div class="input_title">出生年/月/日</div>
+          <div class="wid100 fx fx_nowrap">
+            <select id="driverbday_y">
+              <option value=""></option>
+            </select>
+            <div class="slash">/</div>
+            <select id="driverbday_m">
+              <option value=""></option>
+            </select>
+            <div class="slash">/</div>
+            <select id="driverbday_d">
+              <option value=""></option>
+            </select>
+          </div>
+          <input type="hidden" id="DriverBirthday" name="DriverBirthday" />
+          <div class="error" id="DriverBirthday_er"></div>
+        </div>
+
+        <div class="wid100 fx fx_mobile_wrap">
+          <div class="input_box">
+            <div class="input_title">身分證號碼</div>
+            <input type="text" id="DriverIdNo" name="DriverIdNo" />
+            <div class="error" id="DriverIdNo_er"></div>
+          </div>
+          <div class="space"></div>
+          <div class="input_box">
+            <div class="input_title">行動電話</div>
+            <input
+              type="text"
+              id="DriverMobilePhone"
+              name="DriverMobilePhone"
+            />
+            <div class="error" id="DriverMobilePhone_er"></div>
+          </div>
+        </div>
+
+        <div class="input_box">
+          <div class="input_title">戶籍地址</div>
+          <input type="text" id="DriverAddress" name="DriverAddress" />
+          <div class="error" id="DriverAddress_er"></div>
+        </div>
+
+        <div class="wid100 fx fx_mobile_wrap">
+          <div class="input_box">
+            <div class="input_title">車輛型別</div>
+            <input type="text" id="CarType" name="CarType" />
+            <div class="error" id="CarType_er"></div>
+          </div>
+          <div class="space"></div>
+          <div class="input_box">
+            <div class="input_title">車牌號碼</div>
+            <input type="text" id="CarNo" name="CarNo" />
+            <div class="error" id="CarNo_er"></div>
+          </div>
+        </div>
+      </div>
+
+      <!--接送機人員資料-->
+      <div class="sect_box wid100">
+        <div class="sec_title">接送機人員資料</div>
+
+        <div class="wid100 fx fx_mobile_wrap">
+          <div class="input_box">
+            <div class="input_title">姓名</div>
+            <input type="text" id="PickerName" name="PickerName" />
+            <div class="error" id="PickerName_er"></div>
+          </div>
+          <div class="space"></div>
+          <div class="input_box">
+            <div class="input_title">身分證號碼</div>
+            <input type="text" id="PickerIdNo" name="PickerIdNo" />
+            <div class="error" id="PickerIdNo_er"></div>
+          </div>
+        </div>
+
+        <div class="input_box">
+          <div class="input_title">出生年/月/日</div>
+          <div class="wid100 fx fx_nowrap">
+            <select id="pickerbday_y">
+              <option value=""></option>
+            </select>
+            <div class="slash">/</div>
+            <select id="pickerbday_m">
+              <option value=""></option>
+            </select>
+            <div class="slash">/</div>
+            <select id="pickerbday_d">
+              <option value=""></option>
+            </select>
+          </div>
+          <input type="hidden" id="PickerBirthday" name="PickerBirthday" />
+          <div class="error" id="PickerBirthday_er"></div>
+        </div>
+
+        <div class="wid100 fx fx_mobile_wrap">
+          <div class="input_box">
+            <div class="input_title">護照號碼/中港澳入台證號</div>
+            <input type="text" id="PickerPassportNo" name="PickerPassportNo" />
+            <div class="error" id="PickerPassportNo_er"></div>
+          </div>
+          <div class="space"></div>
+          <div class="input_box">
+            <div class="input_title">行動電話</div>
+            <input
+              type="text"
+              id="PickerMobilePhone"
+              name="PickerMobilePhone"
+            />
+            <div class="error" id="PickerMobilePhone_er"></div>
+          </div>
+        </div>
+
+        <div class="input_box">
+          <div class="input_title">戶籍地址</div>
+          <input type="text" id="PickerAddress" name="PickerAddress" />
+          <div class="error" id="PickerAddress_er"></div>
+        </div>
+      </div>
+
+      <!--特殊需求-->
+      <div class="sect_box wid100">
+        <div class="sec_title">特殊需求</div>
+        <div class="input_box">
+          <div class="radio_box fx fx_acenter">
+            <label class="radio_title">1．是否有需提領預購之免稅商品？</label>
+            <input type="radio" name="IsRemind" value="Y" />
+            <label style="margin-right: 10px;">是</label><br />
+            <input type="radio" name="IsRemind" value="N" checked />
+            <label>否</label><br />
+          </div>
+          <div class="error" id="IsRemind_er"></div>
+        </div>
+
+        <div class="input_box">
+          <div class="radio_box fx fx_acenter">
+            <label class="radio_title">2．外籍旅客是否有需代辦退稅服務？</label>
+            <input type="radio" name="IsTaxRefund" value="Y" />
+            <label style="margin-right: 10px;">是</label><br />
+            <input type="radio" name="IsTaxRefund" value="N" checked />
+            <label>否</label><br />
+          </div>
+          <div class="error" id="IsTaxRefund_er"></div>
+        </div>
+      </div>
+      <div id="submit">送出</div>
+    </form>
+  </body>
+</html>

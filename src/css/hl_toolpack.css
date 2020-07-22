@@ -1,0 +1,240 @@
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    font-family: arial, "Microsoft JhengHei", "微軟正黑體", sans-serif !important;
+    text-decoration: none
+}
+
+a:hover,
+a:active {
+    text-decoration: none
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block
+}
+
+body {
+    line-height: 1
+}
+
+ol,
+ul {
+    list-style: none
+}
+
+blockquote,
+q {
+    quotes: none
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+    content: '';
+    content: none
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0
+}
+
+input,
+textarea {
+    font-size: initial
+}
+
+.fx {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex
+}
+
+.fx_center {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center
+}
+
+.fx_acenter {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center
+}
+
+.fx_jcenter {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center
+}
+
+.fx_around {
+    -ms-flex-pack: distribute;
+    justify-content: space-around
+}
+
+.fx_between {
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between
+}
+
+.fx_end {
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end
+}
+
+.fx_wrap {
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap
+}
+
+.fx_nowrap {
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap
+}
+
+.fx_rwrap {
+    -ms-flex-wrap: wrap-reverse;
+    flex-wrap: wrap-reverse
+}
+
+.wid100 {
+    width: 100%
+}
+
+.wid90 {
+    width: 90%
+}
+
+.wid80 {
+    width: 80%
+}
+
+.wid70 {
+    width: 70%
+}
+
+.wid60 {
+    width: 60%
+}
+
+.wid50 {
+    width: 50%
+}
+
+.wid40 {
+    width: 40%
+}
+
+.wid30 {
+    width: 30%
+}
+
+.wid20 {
+    width: 20%
+}
+
+.wid10 {
+    width: 10%
+}

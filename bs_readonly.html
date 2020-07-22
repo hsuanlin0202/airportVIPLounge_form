@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="stylesheet" href="src/css/style.css" />
+    <script src="src/js/jquery-3.3.1.min.js"></script>
+    <script src="src/js/Jscript.js"></script>
+
+    <title>環宇商務中心</title>
+    <style>
+      input[type="text"] {
+        border: 0px solid white;
+        outline: none;
+      }
+      input:read-only {
+        border: 0px solid white;
+        color: #231a9c;
+      }
+    </style>
+  </head>
+
+  <body class="fx fx_center">
+    <form id="HYForm" class="wid100 main_container fx fx_jcenter fx_wrap">
+      <div class="wid100 fx fx_center title fx_wrap">
+        <p class="wid100 fx fx_center">訂單資料</p>
+      </div>
+
+      <div class="front_info">訂單編號：<label>ABCD1234567</label></div>
+
+      <!--班機資料-->
+      <div class="sect_box wid100">
+        <div class="wid100 fx fx_mobile_wrap">
+          <div class="input_box_read">
+            <div class="input_title">班機類型</div>
+
+            <input
+              readonly
+              value="text"
+              type="text"
+              id="entry_type"
+              name="entry_type"
+              value="出境"
+            />
+          </div>
+          <div class="space"></div>
+          <div class="input_box_read">
+            <div class="input_title">日期</div>
+            <input
+              readonly
+              value="text"
+              type="text"
+              name="Entrydate"
+              id="Entrydate"
+            />
+          </div>
+        </div>
+        <div class="wid100 fx fx_mobile_wrap" id="departure_box">
+          <div class="input_box_read">
+            <div class="input_title">出境班機號碼</div>
+            <input
+              readonly
+              value="text"
+              type="text"
+              id="DepartureFlightNo"
+              name="DepartureFlightNo"
+            />
+          </div>
+          <div class="space"></div>
+          <div class="input_box_read">
+            <div class="input_title">出境班機時間</div>
+
+            <input readonly value="text" type="text" id="departuretime" />
+          </div>
+        </div>
+
+        <div class="wid100 fx fx_mobile_wrap" id="arrival_box">
+          <div class="input_box_read">
+            <div class="input_title">入境班機號碼</div>
+            <input
+              readonly
+              value="text"
+              type="text"
+              id="ArrivalFlightNo"
+              name="ArrivalFlightNo"
+            />
+            <input
+              readonly
+              value="text"
+              type="hidden"
+              id="TransferDepartureFlightNo"
+              name="TransferDepartureFlightNo"
+            />
+            <input
+              readonly
+              value="text"
+              type="hidden"
+              id="TransferArrivalFlightNo"
+              name="TransferArrivalFlightNo"
+            />
+          </div>
+          <div class="space"></div>
+          <div class="input_box_read">
+            <div class="input_title">入境班機時間</div>
+
+            <input readonly value="text" type="text" id="arrivaltime" />
+          </div>
+        </div>
+
+        <div class="wid100 fx fx_mobile_wrap" id="entryVIP_box">
+          <div class="input_box_read">
+            <div class="input_title">預計抵達環宇商務中心時間</div>
+
+            <input
+              readonly
+              value="text"
+              type="text"
+              id="EstimatedArrivalHYTime"
+              name="EstimatedArrivalHYTime"
+            />
+          </div>
+          <div class="wid100"></div>
+        </div>
+      </div>
+
+      <!--貴賓基本資料-->
+      <div class="sect_box wid100">
+        <div class="sec_title">貴賓基本資料</div>
+        <div class="input_box_read">
+          <div class="input_title">護照上中文姓/名</div>
+          <input
+            readonly
+            value="text"
+            type="text"
+            id="VipNameTW"
+            name="VipNameTW"
+          />
+        </div>
+
+        <div class="wid100 fx fx_mobile_wrap">
+          <div class="input_box_read">
+            <div class="input_title">護照上英文姓</div>
+            <input
+              readonly
+              value="text"
+              type="text"
+              id="VipLastNameEN"
+              name="VipLastNameEN"
+            />
+          </div>
+          <div class="space"></div>
+          <div class="input_box_read">
+            <div class="input_title">護照上英文名</div>
+            <input
+              readonly
+              value="text"
+              type="text"
+              id="VipFirstNameEN"
+              name="VipFirstNameEN"
+            />
+          </div>
+        </div>
+
+        <div class="wid100 fx fx_mobile_wrap">
+          <div class="input_box_read">
+            <div class="input_title">國籍</div>
+            <input
+              readonly
+              value="text"
+              type="text"
+              id="VipCountry"
+              name="VipCountry"
+            />
+          </div>
+          <div class="space"></div>
+          <div class="input_box_read">
+            <div class="input_title">護照號碼</div>
+            <input
+              readonly
+              value="text"
+              type="text"
+              id="VipPassportNo"
+              name="VipPassportNo"
+            />
+          </div>
+        </div>
+        <div class="wid100 fx fx_mobile_wrap">
+          <div class="input_box_read">
+            <div class="input_title">護照有效期限</div>
+            <input
+              readonly
+              value="text"
+              type="text"
+              id="PassportExpDate"
+              name="PassportExpDate"
+            />
+          </div>
+          <div class="space"></div>
+          <div class="input_box_read">
+            <div class="input_title">出生年/月/日</div>
+            <input
+              readonly
+              value="text"
+              type="text"
+              id="VipBirthday"
+              name="VipBirthday"
+            />
+          </div>
+        </div>
+
+        <div class="wid100 fx fx_mobile_wrap">
+          <div class="input_box_read">
+            <div class="input_title">性別</div>
+            <input
+              readonly
+              value="text"
+              type="text"
+              name="VipSex"
+              id="VipSex"
+            />
+          </div>
+          <div class="space"></div>
+          <div class="input_box_read">
+            <div class="input_title">行動電話</div>
+            <input
+              readonly
+              value="text"
+              type="text"
+              pattern="\d*"
+              id="VipMobilePhone"
+              name="VipMobilePhone"
+            />
+          </div>
+        </div>
+
+        <div class="wid100 fx fx_mobile_wrap">
+          <div class="input_box_read">
+            <div class="input_title">市話</div>
+            <input
+              readonly
+              value="text"
+              type="text"
+              id="VipTel"
+              name="VipTel"
+            />
+          </div>
+          <div class="space"></div>
+          <div class="input_box_read">
+            <div class="input_title">傳真</div>
+            <input
+              readonly
+              value="text"
+              type="text"
+              id="VipFax"
+              name="VipFax"
+            />
+          </div>
+        </div>
+
+        <div class="input_box_read">
+          <div class="input_title">E-mail</div>
+          <input
+            readonly
+            value="text"
+            type="text"
+            id="VipEmail"
+            name="VipEmail"
+          />
+        </div>
+      </div>
+
+      <!--聯絡人資料-->
+      <div class="sect_box wid100">
+        <div class="sec_title">聯絡人資料</div>
+
+        <div class="input_box_read">
+          <div class="radio_box fx fx_acenter fx_nowrap" style="height: 32px;">
+            <input
+              readonly
+              value="text"
+              type="text"
+              name="ContactIsSelf"
+              value="非貴賓本人"
+            />
+          </div>
+        </div>
+
+        <div class="wid100">
+          <div class="wid100 fx fx_mobile_wrap">
+            <div class="input_box_read">
+              <div class="input_title">姓名</div>
+              <input
+                readonly
+                value="text"
+                type="text"
+                id="ContactName"
+                name="ContactName"
+              />
+            </div>
+            <div class="space"></div>
+            <div class="input_box_read">
+              <div class="input_title">職稱</div>
+              <input
+                readonly
+                value="text"
+                type="text"
+                id="ContactJobTitle"
+                name="ContactJobTitle"
+              />
+            </div>
+          </div>
+
+          <div class="wid100 fx fx_mobile_wrap">
+            <div class="input_box_read">
+              <div class="input_title">公司名稱</div>
+              <input
+                readonly
+                value="text"
+                type="text"
+                id="ContactCompanyName"
+                name="ContactCompanyName"
+              />
+            </div>
+            <div class="space"></div>
+            <div class="input_box_read">
+              <div class="input_title">付款方式</div>
+              <input
+                readonly
+                value="text"
+                type="text"
+                id="PaymentMethod"
+                name="PaymentMethod"
+              />
+            </div>
+          </div>
+
+          <div class="wid100 fx fx_mobile_wrap">
+            <div class="input_box_read">
+              <div class="input_title">發票</div>
+
+              <input readonly value="text" type="text" name="InvoiceType" />
+            </div>
+            <div class="space"></div>
+            <div class="input_box_read">
+              <div class="input_title">統一編號</div>
+              <input
+                readonly
+                value="text"
+                type="text"
+                id="TaxIdNumber"
+                name="TaxIdNumber"
+              />
+            </div>
+          </div>
+
+          <div class="input_box_read">
+            <div class="input_title">發票寄送地址(含郵遞區號)</div>
+            <input
+              readonly
+              value="text"
+              type="text"
+              id="InvoiceAddress"
+              name="InvoiceAddress"
+            />
+          </div>
+
+          <div class="wid100 fx fx_mobile_wrap">
+            <div class="input_box_read">
+              <div class="input_title">行動電話</div>
+              <input
+                readonly
+                value="text"
+                type="text"
+                id="ContactMobilePhone"
+                name="ContactMobilePhone"
+              />
+            </div>
+            <div class="space"></div>
+            <div class="input_box_read">
+              <div class="input_title">市話</div>
+              <input
+                readonly
+                value="text"
+                type="text"
+                id="ContactTel"
+                name="ContactTel"
+              />
+            </div>
+          </div>
+
+          <div class="wid100 fx fx_mobile_wrap">
+            <div class="input_box_read">
+              <div class="input_title">傳真</div>
+              <input
+                readonly
+                value="text"
+                type="text"
+                id="ContactFax"
+                name="ContactFax"
+              />
+            </div>
+            <div class="space"></div>
+            <div class="input_box_read">
+              <div class="input_title">E-mail</div>
+              <input
+                readonly
+                value="text"
+                type="text"
+                id="ContactEmail"
+                name="ContactEmail"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--接送駕駛資料-->
+      <div class="sect_box wid100">
+        <div class="sec_title">接送駕駛資料</div>
+
+        <div class="input_box_read">
+          <div class="input_title">姓名</div>
+          <input
+            readonly
+            value="text"
+            type="text"
+            id="DriverName"
+            name="DriverName"
+          />
+        </div>
+
+        <div class="input_box_read">
+          <div class="input_title">出生年/月/日</div>
+
+          <input
+            readonly
+            value="text"
+            type="text"
+            id="DriverBirthday"
+            name="DriverBirthday"
+          />
+        </div>
+
+        <div class="wid100 fx fx_mobile_wrap">
+          <div class="input_box_read">
+            <div class="input_title">身分證號碼</div>
+            <input
+              readonly
+              value="text"
+              type="text"
+              id="DriverIdNo"
+              name="DriverIdNo"
+            />
+          </div>
+          <div class="space"></div>
+          <div class="input_box_read">
+            <div class="input_title">行動電話</div>
+            <input
+              readonly
+              value="text"
+              type="text"
+              id="DriverMobilePhone"
+              name="DriverMobilePhone"
+            />
+          </div>
+        </div>
+
+        <div class="input_box_read">
+          <div class="input_title">戶籍地址</div>
+          <input
+            readonly
+            value="text"
+            type="text"
+            id="DriverAddress"
+            name="DriverAddress"
+          />
+        </div>
+
+        <div class="wid100 fx fx_mobile_wrap">
+          <div class="input_box_read">
+            <div class="input_title">車輛型別</div>
+            <input
+              readonly
+              value="text"
+              type="text"
+              id="CarType"
+              name="CarType"
+            />
+          </div>
+          <div class="space"></div>
+          <div class="input_box_read">
+            <div class="input_title">車牌號碼</div>
+            <input readonly value="text" type="text" id="CarNo" name="CarNo" />
+          </div>
+        </div>
+      </div>
+
+      <!--接送機人員資料-->
+      <div class="sect_box wid100">
+        <div class="sec_title">接送機人員資料</div>
+
+        <div class="wid100 fx fx_mobile_wrap">
+          <div class="input_box_read">
+            <div class="input_title">姓名</div>
+            <input
+              readonly
+              value="text"
+              type="text"
+              id="PickerName"
+              name="PickerName"
+            />
+          </div>
+          <div class="space"></div>
+          <div class="input_box_read">
+            <div class="input_title">身分證號碼</div>
+            <input
+              readonly
+              value="text"
+              type="text"
+              id="PickerIdNo"
+              name="PickerIdNo"
+            />
+          </div>
+        </div>
+
+        <div class="input_box_read">
+          <div class="input_title">出生年/月/日</div>
+
+          <input
+            readonly
+            value="text"
+            type="text"
+            id="PickerBirthday"
+            name="PickerBirthday"
+          />
+        </div>
+
+        <div class="wid100 fx fx_mobile_wrap">
+          <div class="input_box_read">
+            <div class="input_title">護照號碼/中港澳入台證號</div>
+            <input
+              readonly
+              value="text"
+              type="text"
+              id="PickerPassportNo"
+              name="PickerPassportNo"
+            />
+          </div>
+          <div class="space"></div>
+          <div class="input_box_read">
+            <div class="input_title">行動電話</div>
+            <input
+              readonly
+              value="text"
+              type="text"
+              id="PickerMobilePhone"
+              name="PickerMobilePhone"
+            />
+          </div>
+        </div>
+
+        <div class="input_box_read">
+          <div class="input_title">戶籍地址</div>
+          <input
+            readonly
+            value="text"
+            type="text"
+            id="PickerAddress"
+            name="PickerAddress"
+          />
+        </div>
+      </div>
+
+      <!--特殊需求-->
+      <div class="sect_box wid100">
+        <div class="sec_title">特殊需求</div>
+        <div class="input_box_read">
+          <div class="radio_box fx fx_acenter">
+            <label class="radio_title">1．是否有需提領預購之免稅商品？</label>
+            <input
+              readonly
+              value="text"
+              type="text"
+              name="IsRemind"
+              value="N"
+            />
+          </div>
+        </div>
+
+        <div class="input_box_read">
+          <div class="radio_box fx fx_acenter">
+            <label class="radio_title">2．外籍旅客是否有需代辦退稅服務？</label>
+            <input
+              readonly
+              value="text"
+              type="text"
+              name="IsTaxRefund"
+              value="N"
+            />
+          </div>
+        </div>
+      </div>
+      <div id="submit">上一頁</div>
+    </form>
+  </body>
+</html>

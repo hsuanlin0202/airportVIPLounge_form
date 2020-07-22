@@ -1,0 +1,463 @@
+@import url(hl_toolpack.css);
+body {
+  background: #f2f2f2;
+}
+
+.main_container {
+  width: 90%;
+}
+
+.sect_box {
+  background: white;
+  -webkit-box-shadow: 0 0 1em #dddddd;
+          box-shadow: 0 0 1em #dddddd;
+  border: 1px solid #dddddd;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 10px 0;
+}
+
+.title {
+  margin: 20px auto;
+  color: #512280;
+}
+
+.front_info {
+  width: 95%;
+  font-size: 16px;
+  line-height: 30px;
+  text-align: justify;
+  color: #666666;
+}
+
+.sec_title {
+  margin: 20px 0;
+  font-size: 20px;
+  color: #666666;
+}
+
+.input_box {
+  width: 100%;
+  color: #666666;
+}
+
+.input_box .input_title {
+  font-size: 14px;
+  color: #666666;
+  margin: 10px 0 5px 0;
+}
+
+.input_box .radio_box {
+  font-size: 14px;
+  color: #666666;
+  margin: 10px 0 5px 0;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.input_box p {
+  width: 100%;
+  margin: 0;
+  font-size: 18px;
+  height: 32px;
+  line-height: 32px;
+  padding-left: 5px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.input_box input[type="text"],
+.input_box select {
+  width: 100%;
+  border: 1px solid #dddddd;
+  margin: 0;
+  font-size: 18px;
+}
+
+.input_box input {
+  height: 32px;
+  padding-left: 5px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.input_box select {
+  height: 32px;
+}
+
+.input_box input[type="radio"] {
+  margin-right: 5px;
+}
+
+.input_box .error {
+  height: 10px;
+  font-size: 12px;
+  color: red;
+  margin-bottom: 5px;
+}
+
+.input_box .slash {
+  font-size: 14px;
+  color: #666666;
+  margin: 0 5px;
+  line-height: 32px;
+}
+
+.input_box .radio_title {
+  width: 80%;
+  max-width: 400px;
+  margin-left: 1.5em;
+  text-indent: -1.5em;
+}
+
+.input_box_read {
+  width: 100%;
+  color: #666666;
+}
+
+.input_box_read .radio_box {
+  font-size: 14px;
+  color: #666666;
+  margin: 10px 0 5px 0;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.input_box_read .radio_title {
+  width: 80%;
+  max-width: 400px;
+  margin-left: 1.5em;
+  text-indent: -1.5em;
+}
+
+.input_box_read .input_title {
+  font-size: 14px;
+  color: #666666;
+  margin: 10px 0 5px 0;
+}
+
+.input_box_read input[type="text"] {
+  width: 100%;
+  border: 0px solid white;
+  color: #231a9c;
+  margin: 0;
+  font-size: 18px;
+  height: 32px;
+  padding-left: 5px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+#submit,
+.submit {
+  border-radius: 5px;
+  background-color: #512280;
+  color: white;
+  font-size: 18px;
+  width: 300px;
+  text-align: center;
+  padding: 20px 0;
+  margin: 20px;
+  cursor: pointer;
+}
+
+.search_box {
+  margin: 50px 0;
+  width: 90%;
+  max-width: 650px;
+  padding: 20px;
+  background: linear-gradient(52deg, #231a9c 35%, #7c2dc9 100%);
+  background: -o-linear-gradient(52deg, #231a9c 35%, #7c2dc9 100%);
+  -webkit-box-shadow: 1px 10px 1em #aaaaaa;
+          box-shadow: 1px 10px 1em #aaaaaa;
+  border-radius: 10px;
+  color: #e9c6fc;
+  font-size: 14px;
+}
+
+.search_box .title {
+  color: #e9c6fc;
+  margin: 10px 0 5px 0;
+}
+
+.search_box .radio_box {
+  margin-top: 5px;
+}
+
+.search_box .radio_box .controls {
+  display: block;
+}
+
+.search_box .radio_box div:not(#foo) > input[type="radio"],
+.search_box .radio_box div:not(#foo) > input[type="checkbox"] {
+  opacity: 0;
+  float: left;
+  width: 1px;
+}
+
+.search_box .radio_box .iradio {
+  padding: 0;
+  border: 1px solid white;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.search_box .radio_box .iradio input {
+  display: none;
+}
+
+.search_box .radio_box div:not(#foo) > input[type="radio"] + label,
+.search_box .radio_box div:not(#foo) > input[type="checkbox"] + label {
+  width: 120px;
+  font-size: 14px;
+  text-align: center;
+  display: block;
+  float: left;
+  margin: 0;
+  clear: none;
+  padding: 10px 0;
+  margin: 0;
+  cursor: pointer;
+  background: #231a9c;
+  color: #5d53e4;
+}
+
+.search_box .radio_box div:not(#foo) > input[type="radio"]:checked + label {
+  background: white;
+  color: #231a9c;
+}
+
+.search_box .radio_box .control-group {
+  display: inline-block;
+  overflow: hidden;
+}
+
+.search_box .inputbox {
+  padding: 5px;
+  background: -webkit-gradient(linear, left bottom, left top, from(#f3deff), to(#ffffff));
+  background: linear-gradient(0deg, #f3deff 0%, #ffffff 100%);
+  background: -o-linear-gradient(0deg, #f3deff 0%, #ffffff 100%);
+  border-radius: 5px;
+}
+
+.search_box input[type="text"],
+.search_box select {
+  background: none;
+  width: 100%;
+  border: none;
+  margin: 0;
+  font-size: 18px;
+  outline: none;
+  color: #231a9c;
+}
+
+.search_box input {
+  height: 32px;
+  padding-left: 5px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.search_box select {
+  height: 32px;
+}
+
+.search_box .slash {
+  font-size: 14px;
+  color: #231a9c;
+  margin: 0 5px;
+  line-height: 32px;
+}
+
+.search_box .search {
+  width: 150px;
+  padding: 13px 0;
+  background: white;
+  color: #231a9c;
+  border: 1px solid #231a9c;
+  letter-spacing: 2px;
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.search_box .search:hover {
+  border: 1px solid white;
+  background: #231a9c;
+  color: white;
+}
+
+.search_box .search:active {
+  border: 1px solid white;
+  background: #5f56e4;
+  color: white;
+}
+
+.mrT10 {
+  margin: 15px 0 0 0;
+}
+
+.re_box {
+  min-width: 330px;
+  padding: 25px 20px 15px 30px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 20px 0;
+}
+
+.orderno {
+  color: #999999;
+  letter-spacing: 1px;
+  font-size: 18px;
+}
+
+.flight_type {
+  border-radius: 5px;
+  width: 45px;
+  height: 26px;
+  line-height: 26px;
+  text-align: center;
+  font-size: 14px;
+  color: white;
+}
+
+.tran {
+  background: #fc91be;
+  border: 1px #f4649f solid;
+}
+
+.ari {
+  background: #87df8e;
+  border: 1px #72d67a solid;
+}
+
+.dep {
+  background: #5db9ee;
+  border: 1px #4ba8df solid;
+}
+
+.fx_aend {
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+
+.flighnum {
+  color: #555555;
+  font-size: 26px;
+}
+
+.flightdate {
+  color: #555555;
+  font-size: 16px;
+}
+
+.dash {
+  margin: 0 3px;
+}
+
+.customer {
+  margin-top: 20px;
+}
+
+.customer .cus_info {
+  margin-bottom: 10px;
+}
+
+.customer .cus_title {
+  font-size: 14px;
+  color: #999999;
+  margin-bottom: 8px;
+}
+
+.customer .cus_name {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #555555;
+}
+
+.btns_box {
+  margin: 10px 0;
+}
+
+.btns_box .btn {
+  width: 30px;
+  font-size: 14px;
+  margin: 0 20px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btns_box .edit {
+  color: #231a9c;
+}
+
+.btns_box .del {
+  color: #c91222;
+}
+
+@media screen and (min-width: 550px) {
+  .main_container {
+    max-width: 960px;
+  }
+  .fx_mobile_wrap {
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+  }
+  .space {
+    width: 40px;
+  }
+  .search_box .title {
+    width: 150px;
+  }
+  .cus_info {
+    width: 25%;
+  }
+  .customer {
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+}
+
+@media screen and (max-device-width: 549px) {
+  .fx_mobile_wrap {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
+  .space {
+    display: none;
+  }
+  .search_box .title {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .to {
+    width: 100%;
+    margin: 10px;
+    text-align: center;
+  }
+  .search {
+    margin: 10px auto;
+  }
+  .cus_info {
+    width: 100%;
+  }
+  .customer {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .dash {
+    display: none;
+  }
+  .flight_time {
+    width: 100%;
+    font-size: 16px;
+    color: #999999;
+    margin-top: 5px;
+  }
+}
+/*# sourceMappingURL=style.css.map */

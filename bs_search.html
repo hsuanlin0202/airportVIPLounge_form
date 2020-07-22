@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="stylesheet" href="src/css/style.css" />
+    <script src="src/js/jquery-3.3.1.min.js"></script>
+    <script src="src/js/Jscript.js"></script>
+
+    <title>環宇商務中心</title>
+  </head>
+
+  <body class="fx fx_center">
+    <div id="HYForm" class="wid100 main_container fx fx_jcenter fx_wrap">
+      <form id="search_from" class="search_box fx fx_center fx_wrap">
+        <div class="radio_box fx fx_acenter">
+          <div class="control-group">
+            <div class="controls iradio">
+              <input
+                type="radio"
+                name="FilghtType"
+                id="de_ar"
+                value="de_ar"
+                checked="checked"
+              />
+              <label class="radio" for="de_ar">
+                出入境
+              </label>
+              <input type="radio" name="FilghtType" id="trans" value="trans" />
+              <label class="radio" for="trans">
+                轉機
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="wid80 fx fx_acenter fx_mobile_wrap mrT10">
+          <div class="title">日期</div>
+          <div class="wid100 fx fx_mobile_wrap fx_acenter">
+            <div class="wid100 fx fx_nowrap fx_acenter inputbox">
+              <select id="ser_date_st_y" style="width: 150%;">
+                <option value=""></option>
+              </select>
+              <div class="slash">/</div>
+              <select id="ser_date_st_m">
+                <option value=""></option>
+              </select>
+              <div class="slash">/</div>
+              <select id="ser_date_st_d">
+                <option value=""></option>
+              </select>
+            </div>
+            <div class="to" style="margin: 10px;">至</div>
+            <div class="wid100 fx fx_nowrap fx_acenter inputbox">
+              <select id="ser_date_ed_y" style="width: 150%;">
+                <option value=""></option>
+              </select>
+              <div class="slash">/</div>
+              <select id="ser_date_ed_m">
+                <option value=""></option>
+              </select>
+              <div class="slash">/</div>
+              <select id="ser_date_ed_d">
+                <option value=""></option>
+              </select>
+            </div>
+            <input type="hidden" id="ser_date_st" name="ser_date_st" />
+            <input type="hidden" id="ser_date_ed" name="ser_date_st" />
+          </div>
+        </div>
+
+        <div class="wid80 fx fx_acenter mrT10 fx_mobile_wrap">
+          <div class="title">身分證字號</div>
+          <div class="wid100 inputbox">
+            <input type="text" id="VipID" name="VipID" />
+          </div>
+        </div>
+        <div class="wid80 fx fx_acenter mrT10 fx_mobile_wrap">
+          <div class="title">行動電話</div>
+          <div class="wid100 inputbox">
+            <input type="text" id="VipMobilePhone" name="VipMobilePhone" />
+          </div>
+        </div>
+        <div class="wid80 fx fx_acenter mrT10 fx_mobile_wrap">
+          <div class="title">姓名</div>
+          <div class="wid100 inputbox">
+            <input type="text" id="VipNameTW" name="VipNameTW" />
+          </div>
+        </div>
+
+        <div class="wid80 fx fx_acenter mrT10 fx_between fx_mobile_wrap">
+          <div class="title" style="width: auto;">請擇一或多條件輸入</div>
+          <div id="search" class="search">查詢</div>
+        </div>
+      </form>
+
+      <!--以下為重複區域-->
+      <div class="fx fx_center re_box flighnum">
+        查無搜尋結果。
+      </div>
+      <div class="sect_box re_box wid80 fx fx_acenter fx_wrap">
+        <div class="fx fx_between wid100">
+          <div class="orderno">ABC1234567</div>
+          <div class="flight_type ari">入境</div>
+        </div>
+        <div class="wid100 fx fx_nowrap fx_acenter" style="margin-top: 5px;">
+          <img src="src/img/ic_airplane.svg" style="width: 36px;" />
+          <div class="wid100 flighnum fx fx_wrap">
+            <label>CDA121</label>
+            <label class="dash">-</label>
+            <label class="flight_time">16:00</label>
+          </div>
+        </div>
+        <div class="wid100 fx fx_nowrap">
+          <div class="customer wid80 fx fx_wrap">
+            <div class="cus_info">
+              <div class="cus_title wid100">姓名</div>
+              <div class="cus_name wid100">阿薩布魯</div>
+            </div>
+            <div class="cus_info">
+              <div class="cus_title wid100">手機號碼</div>
+              <div class="cus_name wid100">0987987987</div>
+            </div>
+            <div class="cus_info">
+              <div class="cus_title wid100">身分證字號</div>
+              <div class="cus_name wid100">A1987987987</div>
+            </div>
+          </div>
+        </div>
+        <div class="wid100 btns_box fx fx_nowrap fx_end">
+          <div class="btn edit">檢視</div>
+          <div class="btn edit">編輯</div>
+          <div class="btn del">刪除</div>
+        </div>
+      </div>
+      <!--以上為重複區域-->
+
+      <div class="sect_box re_box wid80 fx fx_acenter fx_wrap">
+        <div class="fx fx_between wid100">
+          <div class="orderno">ABC1234567</div>
+          <div class="flight_type tran">轉機</div>
+        </div>
+        <div class="wid100 fx fx_nowrap fx_acenter" style="margin-top: 5px;">
+          <img src="src/img/ic_airplane.svg" style="width: 36px;" />
+          <div class="wid100 flighnum fx fx_wrap">
+            <label>CDA121</label>
+            <label class="dash">-</label>
+            <label class="flight_time">16:00</label>
+          </div>
+        </div>
+        <div class="wid100 fx fx_nowrap">
+          <div class="customer wid80 fx fx_wrap">
+            <div class="cus_info">
+              <div class="cus_title wid100">姓名</div>
+              <div class="cus_name wid100">阿薩布魯</div>
+            </div>
+            <div class="cus_info">
+              <div class="cus_title wid100">手機號碼</div>
+              <div class="cus_name wid100">0987987987</div>
+            </div>
+            <div class="cus_info">
+              <div class="cus_title wid100">身分證字號</div>
+              <div class="cus_name wid100">A1987987987</div>
+            </div>
+          </div>
+        </div>
+        <div class="wid100 btns_box fx fx_nowrap fx_end">
+          <div class="btn edit">檢視</div>
+          <div class="btn edit">編輯</div>
+          <div class="btn del">刪除</div>
+        </div>
+      </div>
+
+      <div class="sect_box re_box wid80 fx fx_acenter fx_wrap">
+        <div class="fx fx_between wid100">
+          <div class="orderno">ABC1234567</div>
+          <div class="flight_type dep">出境</div>
+        </div>
+        <div class="wid100 fx fx_nowrap fx_acenter" style="margin-top: 5px;">
+          <img src="src/img/ic_airplane.svg" style="width: 36px;" />
+          <div class="wid100 flighnum fx fx_wrap">
+            <label>CDA121</label>
+            <label class="dash">-</label>
+            <label class="flight_time">16:00</label>
+          </div>
+        </div>
+        <div class="wid100 fx fx_nowrap">
+          <div class="customer wid80 fx fx_wrap">
+            <div class="cus_info">
+              <div class="cus_title wid100">姓名</div>
+              <div class="cus_name wid100">阿薩布魯</div>
+            </div>
+            <div class="cus_info">
+              <div class="cus_title wid100">手機號碼</div>
+              <div class="cus_name wid100">0987987987</div>
+            </div>
+            <div class="cus_info">
+              <div class="cus_title wid100">身分證字號</div>
+              <div class="cus_name wid100">A1987987987</div>
+            </div>
+          </div>
+        </div>
+        <div class="wid100 btns_box fx fx_nowrap fx_end">
+          <div class="btn edit">檢視</div>
+          <div class="btn edit">編輯</div>
+          <div class="btn del">刪除</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
