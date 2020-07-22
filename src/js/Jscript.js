@@ -1,32 +1,7 @@
 $(document).ready(function () {
   init();
 
-  // 新增會員資料--------------------------------------------
-  $("#IdentityId").on("input", function () {
-    id_check("IdentityId", "IdentityId_er");
-  });
-
-  $("#fullName").on("input", function () {
-    words_check("fullName", 2, "fullName_er", "完整姓名");
-  });
-
-  $("#cardFront6").on("input", function () {
-    words_check("cardFront6", 6, "cardFront6_er", "卡號前6碼");
-  });
-
-  $("#cardBack4").on("input", function () {
-    words_check("cardBack4", 4, "cardBack4_er", "卡號後4碼");
-  });
-
-  // 新增會員資料填表用--------------------------------------------
-  $("#cus_submit").click(function () {
-    const verify = cus_submit();
-    if (verify == 0) {
-      console.log("可以拿去接API唷");
-    }
-  });
-
-  // 填表用--------------------------------------------
+  //填表用--------------------------------------------
   $("#submit").click(function () {
     var x = $("#HYForm").serializeArray();
     var jsonData = "{";
@@ -41,53 +16,25 @@ $(document).ready(function () {
       }
     });
     console.log(x);
-
-    $.ajax({
-      type: "POST",
-      dataType: "json",
-      url: "/VIPReserveSubmit",
-      data: jsonData,
-      contentType: "application/json; charset=UTF-8",
-      success: function (response) {
-        var result = response;
-        console.log("成功");
-        console.log(result.RtnMessage);
-        $.blockUI({
-          message:
-            '<div class="orderblockUI fx fx_center fx_wrap" style="padding:25px"><p style="width:100%;text-align:center;">' +
-            result.RtnMessage +
-            '<br><br></p><div id="sent_btn">確定</div></div>',
-        });
-        $("#sent_btn").click(function () {
-          if (result.RtnStatusCode == "C") {
-            window.location.href = "/estimatedReq";
-          } else if (result.RtnStatusCode == "E") {
-            window.location.href = "/estimatedReqSearch";
-          }
-        });
-      },
-      error: function (e) {
-        console.log("失敗");
-        $.blockUI({
-          message:
-            '<div class="orderblockUI fx fx_center fx_wrap" style="padding:25px"><p style="width:100%;text-align:center;">訂單修改失敗<br><br>請稍後再試</p><div id="sent_btn">確定</div></div>',
-        });
-        $("#sent_btn").click(function () {
-          if (result.RtnStatusCode == "C") {
-            // 傳進來的資料待提供
-            window.location.href = "/estimatedReq";
-          } else {
-            window.location.href = "/estimatedReqSearch";
-          }
-        });
-      },
-      complete: function () {
-        console.log("完成");
-      },
-    });
+    // $.ajax({
+    //   type: "POST",
+    //   dataType: "json",
+    //   url: "/huanYuReserveSubmit",
+    //   data: jsonData,
+    //   contentType: "application/json; charset=UTF-8",
+    //   success: function (response) {
+    //     console.log("成功");
+    //   },
+    //   error: function (e) {
+    //     console.log("失敗");
+    //   },
+    //   complete: function () {
+    //     console.log("完成");
+    //   },
+    // });
   });
 
-  // 搜尋用--------------------------------------------
+  //搜尋用--------------------------------------------
   $("#search").click(function () {
     var x = $("#search_from").serializeArray();
     var jsonData = "{";
@@ -102,251 +49,120 @@ $(document).ready(function () {
       }
     });
     console.log(x);
-    // console.log(jsonData);
-    search_ajax(jsonData);
+    console.log(jsonData);
+
+    // $.ajax({
+    //   type: "POST",
+    //   dataType: "json",
+    //   url: "/huanYuReserveSearch",
+    //   data: jsonData,
+    //   contentType: "application/json; charset=UTF-8",
+    //   success: function (response) {
+    //     console.log("成功");
+    //   },
+    //   error: function (e) {
+    //     console.log("失敗");
+    //   },
+    //   complete: function () {
+    //     console.log("完成");
+    //   },
+    // });
   });
 
-  const search_ajax = (jsonData) => {
-    document.getElementById("searchResult").innerHTML = "";
-
-    $.ajax({
-      type: "POST",
-      dataType: "json",
-      url: "/VIPReserveSearch",
-      data: jsonData,
-      contentType: "application/json; charset=UTF-8",
-      success: function (response) {
-        console.log(response);
-        var reqList = response;
-
-        var item = "";
-        if (reqList.length <= 0) {
-          item += '<div class="fx fx_center re_box flighnum">';
-          item += "查無搜尋結果。</div>";
-        } else {
-          $.each(reqList, function (i, result) {
-            // console.log(result);
-            var entryType = result.EntryType;
-            var entryTypeName = "";
-            if ("arrival" == entryType) {
-              entryType = "ari";
-              entryTypeName = "入境";
-            } else if ("departure" == entryType) {
-              entryType = "dep";
-              entryTypeName = "出境";
-            } else if ("transfer" == entryType) {
-              entryType = "tran";
-              entryTypeName = "轉機";
-            }
-
-            item +=
-              '<div id="' +
-              result.OrderNo +
-              '_box" class="wid80 fx fx_acenter fx_wrap">';
-            item +=
-              '<div class="wid100 create_date">需求單建立日期：' +
-              result.CreateDateString +
-              "</div>";
-            item +=
-              '<div class="sect_box re_box wid100 fx fx_acenter fx_wrap">';
-            item += '<div class="fx fx_between wid100">';
-            item += '<div class="orderno">' + result.OrderNo + "</div>";
-            item +=
-              '<div class="flight_type ' +
-              entryType +
-              '">' +
-              entryTypeName +
-              "</div>";
-            item += "</div>";
-            item +=
-              '<div class="wid100 fx fx_nowrap fx_acenter" style="margin-top: 5px;">';
-            item += '<img src="img/ic_airplane.svg" style="width: 36px;" />';
-            item += '<div class="wid100 flighnum fx fx_wrap">';
-            item += "<label>" + result.DepartureFlightNo + "</label>";
-            item += '<label class="dash">-</label>';
-            item +=
-              '<label class="flight_time">' +
-              result.DepartureDateString +
-              "</label>";
-            item += "</div>";
-            item += "</div>";
-            item += '<div class="wid100 fx fx_nowrap">';
-            item += '<div class="customer wid80 fx fx_wrap">';
-            item += '<div class="cus_info">';
-            item += '<div class="cus_title wid100">姓名</div>';
-            item +=
-              '<div class="cus_name wid100">' + result.VipNameTw + "</div>";
-            item += "</div>";
-            item += '<div class="cus_info">';
-            item += '<div class="cus_title wid100">手機號碼</div>';
-            item +=
-              '<div class="cus_name wid100">' +
-              result.VipMobilePhone +
-              "</div>";
-            item += "</div>";
-            item += '<div class="cus_info">';
-            item += '<div class="cus_title wid100">身分證字號</div>';
-            item +=
-              '<div class="cus_name wid100">' + result.VipPassportNo + "</div>";
-            item += "</div>";
-            item += "</div>";
-            item += "</div>";
-            item += '<div class="wid100 btns_box fx fx_nowrap fx_end">';
-            item +=
-              '<div class="btn edit" onclick="window.location.href =\'/estimatedReqReadonly/' +
-              result.OrderNo +
-              "'\">檢視</div>";
-            item +=
-              '<div class="btn edit" onclick="window.location.href =\'/estimatedReq/' +
-              result.OrderNo +
-              "'\">編輯</div>";
-            item +=
-              '<div class="btn del" id="' + result.OrderNo + '">刪除</div>';
-            item += "</div>";
-            item += "</div></div>";
-          });
-        }
-        document.getElementById("searchResult").innerHTML = item;
-      },
-      error: function (e) {
-        console.log("搜尋失敗");
-        var item = "";
-        item += '<div class="fx fx_center re_box flighnum">';
-        item += "查無搜尋結果。</div>";
-        document.getElementById("searchResult").innerHTML = item;
-      },
-      complete: function () {
-        console.log("搜尋完成");
-
-        $(".del").click(function () {
-          const orderno = $(this).val(name)[0].id;
-          $("#type_picked").val(orderno);
-          if (confirm("是否要刪除訂單： " + orderno + " ？")) {
-            VIPReserveDelete(orderno);
-          } else {
-          }
-        });
-      },
-    });
-  };
-
-  // 刪除用--------------------------------------------
-  const VIPReserveDelete = (orderno) => {
-    console.log(orderno + "被刪掉了!!");
-    var jsonData = '{"OrderNo":"' + orderno + '"}';
-    $.ajax({
-      type: "POST",
-      dataType: "json",
-      data: jsonData,
-      url: "/VIPReserveDelete",
-      contentType: "application/json; charset=UTF-8",
-      success: function (response) {
-        console.log("刪除成功");
-        $("#" + orderno + "_box").hide();
-      },
-      error: function (e) {
-        console.log("刪除失敗");
-      },
-      complete: function () {
-        console.log("刪除完成");
-      },
-    });
-  };
-
-  // 班機資料--------------------------------------------
-  // 航班日期_y
+  //班機資料--------------------------------------------
+  //航班日期_y
   $("#entry_date_y").change(function () {
     select_check("entry_date_m", "entrydate_er", "日期");
     entrydate_combine();
   });
 
-  // 航班日期_m
+  //航班日期_m
   $("#entry_date_m").change(function () {
     updateNumberOfDays("entry_date_y", "entry_date_m", "entry_date_d");
     select_check("entry_date_y", "entrydate_er", "日期");
     entrydate_combine();
   });
 
-  // 航班日期_d
+  //航班日期_d
   $("#entry_date_d").change(function () {
     entrydate_combine();
   });
 
-  // 出境時間_h
+  //出境時間_h
   $("#departure_time_h").change(function () {
     select_check("departure_time_m", "departuretime_er", "出境時間");
     entrydate_combine();
   });
 
-  // 出境時間_m
+  //出境時間_m
   $("#departure_time_m").change(function () {
     select_check("departure_time_h", "departuretime_er", "出境時間");
     entrydate_combine();
   });
 
-  // 入境時間_h
+  //入境時間_h
   $("#arrival_time_h").change(function () {
     select_check("arrival_time_m", "arrivaltime_er", "入境時間");
     entrydate_combine();
   });
 
-  // 入境時間_m
+  //入境時間_m
   $("#arrival_time_m").change(function () {
     select_check("arrival_time_h", "arrivaltime_er", "入境時間");
     entrydate_combine();
   });
 
-  // vip時間_h
+  //vip時間_h
   $("#vip_time_h").change(function () {
     select_check("vip_time_m", "EstimatedArrivalHYTime_er", "抵達時間");
     entrydate_combine();
   });
 
-  // vip時間_m
+  //vip時間_m
   $("#vip_time_m").change(function () {
     select_check("vip_time_h", "EstimatedArrivalHYTime_er", "抵達時間");
     entrydate_combine();
   });
 
-  // 出境航班編號
+  //出境航班編號
   $("#DepartureFlightNo").on("input", function () {
     words_check("DepartureFlightNo", 4, "DepartureFlightNo_er", "出境班機號碼");
     entryno_combine();
   });
 
-  // 入境航班編號
+  //入境航班編號
   $("#ArrivalFlightNo").on("input", function () {
     words_check("ArrivalFlightNo", 4, "ArrivalFlightNo_er", "入境班機號碼");
     entryno_combine();
   });
 
-  // 貴賓基本資料--------------------------------------------
-  // 中文姓/名
+  //貴賓基本資料--------------------------------------------
+  //中文姓/名
   $("#VipNameTW").on("input", function () {
     words_check("VipNameTW", 2, "VipNameTW_er", "完整姓名");
   });
 
-  // 護照上英文姓
+  //護照上英文姓
   $("#VipLastNameEN").on("input", function () {
     words_check("VipLastNameEN", 2, "VipLastNameEN_er", "完整英文姓氏");
   });
 
-  // 護照上英文名
+  //護照上英文名
   $("#VipFirstNameEN").on("input", function () {
     words_check("VipFirstNameEN", 2, "VipFirstNameEN_er", "完整英文名");
   });
 
-  // 國籍
+  //國籍
   $("#VipCountry").on("input", function () {
     words_check("VipCountry", 2, "VipCountry_er", "完整國籍");
   });
 
-  // 護照號碼
+  //護照號碼
   $("#VipPassportNo").on("input", function () {
     words_check("VipPassportNo", 6, "VipPassportNo_er", "完整護照號碼");
   });
 
-  // 護照有效期限
+  //護照有效期限
   $("#passport_exp_y").change(function () {
     select_check("passport_exp_m", "PassportExpDate_er", "護照有效期限");
     date_combine(
@@ -378,7 +194,7 @@ $(document).ready(function () {
     );
   });
 
-  // VIP出生年/月/日
+  //VIP出生年/月/日
   $("#vipbirthday_y").change(function () {
     select_check("vipbirthday_m", "VipBirthday_er", "出生年月日");
     date_combine(
@@ -410,83 +226,83 @@ $(document).ready(function () {
     );
   });
 
-  // 行動電話
+  //行動電話
   $("#VipMobilePhone").on("input", function () {
     mobile_check("VipMobilePhone", "VipMobilePhone_er", "m");
   });
 
-  // 市話
+  //市話
   $("#VipTel").on("input", function () {
     mobile_check("VipTel", "VipTel_er", "t");
   });
 
-  // 傳真
+  //傳真
   $("#VipFax").on("input", function () {
     mobile_check("VipFax", "VipFax_er", "t");
   });
 
-  // Email
+  //Email
   $("#VipEmail").on("input", function () {
     email_check("VipEmail", "VipEmail_er");
   });
 
-  // 聯絡人資料--------------------------------------------
-  // 本人與否
+  //聯絡人資料--------------------------------------------
+  //本人與否
   $("input[name='ContactIsSelf']").click(function () {
     contact_info();
   });
 
-  // 姓名
+  //姓名
   $("#ContactName").on("input", function () {
     words_check("ContactName", 2, "ContactName_er", "完整姓名");
   });
 
-  // 職稱
+  //職稱
   $("#ContactJobTitle").on("input", function () {
     words_check("ContactJobTitle", 2, "ContactJobTitle_er", "完整職稱");
   });
 
-  // 公司名稱
+  //公司名稱
   $("#ContactCompanyName").on("input", function () {
     words_check("ContactCompanyName", 2, "ContactCompanyName_er", "公司名稱");
   });
 
-  // 付款方式待確認
+  //付款方式待確認
 
-  // 統一編號不一定要填？
+  //統一編號不一定要填？
 
-  // 發票寄送地址
+  //發票寄送地址
   $("#InvoiceAddress").on("input", function () {
     words_check("InvoiceAddress", 10, "InvoiceAddress_er", "發票寄送地址");
   });
 
-  // 行動電話
+  //行動電話
   $("#ContactMobilePhone").on("input", function () {
     mobile_check("ContactMobilePhone", "ContactMobilePhone_er", "m");
   });
 
-  // 市話
+  //市話
   $("#ContactTel").on("input", function () {
     mobile_check("ContactTel", "ContactTel_er", "t");
   });
 
-  // 傳真
+  //傳真
   $("#ContactFax").on("input", function () {
     mobile_check("ContactFax", "ContactFax_er", "t");
   });
 
-  // Email
+  //Email
   $("#ContactEmail").on("input", function () {
     email_check("ContactEmail", "ContactEmail_er");
   });
 
-  // 接送駕駛資料--------------------------------------------
-  // 姓名
+  //接送駕駛資料--------------------------------------------
+  //姓名
   $("#DriverName").on("input", function () {
     words_check("DriverName", 2, "DriverName_er", "完整姓名");
   });
 
-  // 接送駕駛出生年/月/日
+  //接送駕駛出生年/月/日
   $("#driverbday_y").change(function () {
     select_check("driverbday_m", "DriverBirthday_er", "出生年月日");
     date_combine(
@@ -518,40 +334,40 @@ $(document).ready(function () {
     );
   });
 
-  // 身分證號碼
+  //身分證號碼
   $("#DriverIdNo").on("input", function () {
     id_check("DriverIdNo", "DriverIdNo_er");
   });
 
-  // 行動電話
+  //行動電話
   $("#DriverMobilePhone").on("input", function () {
     mobile_check("DriverMobilePhone", "DriverMobilePhone_er", "m");
   });
 
-  // 戶籍地址
+  //戶籍地址
   $("#DriverAddress").on("input", function () {
     words_check("DriverAddress", 7, "DriverAddress_er", "戶籍地址");
   });
 
-  // 車輛型別???
+  //車輛型別???
 
-  // 車牌號碼
+  //車牌號碼
   $("#CarNo").on("input", function () {
     words_check("CarNo", 5, "CarNo_er", "車牌號碼");
   });
 
-  // 接送機人員資料--------------------------------------------
-  // 姓名
+  //接送機人員資料--------------------------------------------
+  //姓名
   $("#PickerName").on("input", function () {
     words_check("PickerName", 2, "PickerName_er", "完整姓名");
   });
 
-  // 身分證號碼
+  //身分證號碼
   $("#PickerIdNo").on("input", function () {
     id_check("PickerIdNo", "PickerIdNo_er");
   });
 
-  // 接送機人員出生年/月/日
+  //接送機人員出生年/月/日
   $("#pickerbday_y").change(function () {
     select_check("pickerbday_m", "PickerBirthday_er", "出生年月日");
     date_combine(
@@ -583,7 +399,7 @@ $(document).ready(function () {
     );
   });
 
-  // 護照號碼/中港澳入台證號
+  //護照號碼/中港澳入台證號
   $("#PickerPassportNo").on("input", function () {
     words_check(
       "PickerPassportNo",
@@ -593,12 +409,12 @@ $(document).ready(function () {
     );
   });
 
-  // 行動電話
+  //行動電話
   $("#PickerMobilePhone").on("input", function () {
     mobile_check("PickerMobilePhone", "PickerMobilePhone_er", "m");
   });
 
-  // 戶籍地址
+  //戶籍地址
   $("#PickerAddress").on("input", function () {
     words_check("PickerAddress", 7, "PickerAddress_er", "戶籍地址");
   });
@@ -615,13 +431,13 @@ $(document).ready(function () {
     tex_refund();
   });
 
-  // 搜尋日期-開始
+  //搜尋日期-開始
   $("#ser_date_st_y").change(function () {
     date_combine(
       "ser_date_st_y",
       "ser_date_st_m",
       "ser_date_st_d",
-      "DepartureDateBegin"
+      "ser_date_st"
     );
   });
 
@@ -631,7 +447,7 @@ $(document).ready(function () {
       "ser_date_st_y",
       "ser_date_st_m",
       "ser_date_st_d",
-      "DepartureDateBegin"
+      "ser_date_st"
     );
   });
 
@@ -640,17 +456,17 @@ $(document).ready(function () {
       "ser_date_st_y",
       "ser_date_st_m",
       "ser_date_st_d",
-      "DepartureDateBegin"
+      "ser_date_st"
     );
   });
 
-  // 搜尋日期-結束
+  //搜尋日期-結束
   $("#ser_date_ed_y").change(function () {
     date_combine(
       "ser_date_ed_y",
       "ser_date_ed_m",
       "ser_date_ed_d",
-      "DepartureDateEnd"
+      "ser_date_ed"
     );
   });
 
@@ -660,7 +476,7 @@ $(document).ready(function () {
       "ser_date_ed_y",
       "ser_date_ed_m",
       "ser_date_ed_d",
-      "DepartureDateEnd"
+      "ser_date_ed"
     );
   });
 
@@ -669,154 +485,50 @@ $(document).ready(function () {
       "ser_date_ed_y",
       "ser_date_ed_m",
       "ser_date_ed_d",
-      "DepartureDateEnd"
+      "ser_date_ed"
     );
   });
 });
 
 const init = () => {
-  // init flight_info
+  //init flight_info
   flight_info();
 
-  // init entry_date
+  //init entry_date
   future_date_factory("entry_date_y", "entry_date_m", "entry_date_d");
-  const entry_datev_y = $("#entry_datev_y").val();
-  const entry_datev_m = $("#entry_datev_m").val();
-  const entry_datev_d = $("#entry_datev_d").val();
-  if (entry_datev_y != null || entry_datev_y != "") {
-    $("#entry_date_y").val(entry_datev_y);
-    $("#entry_date_m").val(entry_datev_m);
-    updateNumberOfDays("entry_date_y", "entry_date_m", "entry_date_d");
-    $("#entry_date_d").val(entry_datev_d);
-  }
 
-  // init departure_time
+  //init departure_time
   time_factory("departure_time_h", "departure_time_m");
-  const departure_timev_h = $("#departure_timev_h").val();
-  const departure_timev_m = $("#departure_timev_m").val();
-  if (departure_timev_h != null || departure_timev_h != "") {
-    $("#departure_time_h").val(departure_timev_h);
-    $("#departure_time_m").val(departure_timev_m);
-  }
 
-  // init arrival_time
+  //init arrival_time
   time_factory("arrival_time_h", "arrival_time_m");
-  const arrival_timev_h = $("#arrival_timev_h").val();
-  const arrival_timev_m = $("#arrival_timev_m").val();
-  if (arrival_timev_h != null || arrival_timev_h != "") {
-    $("#arrival_time_h").val(arrival_timev_h);
-    $("#arrival_time_m").val(arrival_timev_m);
-  }
 
-  // init vip_time
+  //init vip_time
   time_factory("vip_time_h", "vip_time_m");
-  const vip_timev_h = $("#vip_timev_h").val();
-  const vip_timev_m = $("#vip_timev_m").val();
-  if (vip_timev_h != null || vip_timev_h != "") {
-    $("#vip_time_h").val(vip_timev_h);
-    $("#vip_time_m").val(vip_timev_m);
-  }
 
-  // init passport_exp
+  //init passport_exp
   future_date_factory("passport_exp_y", "passport_exp_m", "passport_exp_d");
-  const passport_expv_y = $("#passport_expv_y").val();
-  const passport_expv_m = $("#passport_expv_m").val();
-  const passport_expv_d = $("#passport_expv_d").val();
-  if (passport_expv_y != null || passport_expv_y != "") {
-    $("#passport_exp_y").val(passport_expv_y);
-    $("#passport_exp_m").val(passport_expv_m);
-    updateNumberOfDays("passport_exp_y", "passport_exp_m", "passport_exp_d");
-    $("#passport_exp_d").val(passport_expv_d);
-  }
 
-  // init vipbirthday
+  //init vipbirthday
   date_factory("vipbirthday_y", "vipbirthday_m", "vipbirthday_d");
-  const vipbirthdayv_y = $("#vipbirthdayv_y").val();
-  const vipbirthdayv_m = $("#vipbirthdayv_m").val();
-  const vipbirthdayv_d = $("#vipbirthdayv_d").val();
-  if (vipbirthdayv_y != null || vipbirthdayv_y != "") {
-    $("#vipbirthday_y").val(vipbirthdayv_y);
-    $("#vipbirthday_m").val(vipbirthdayv_m);
-    updateNumberOfDays("vipbirthday_y", "vipbirthday_m", "vipbirthday_d");
-    $("#vipbirthday_d").val(vipbirthdayv_d);
-  }
 
-  // init contact_info;
-  const contactisselfv = $("#contactisselfv").val();
-  if (contactisselfv != null || contactisselfv != "") {
-    $("input[name=ContactIsSelf][value='" + contactisselfv + "']").attr(
-      "checked",
-      true
-    );
-  }
+  //init contact_info;
   contact_info();
 
-  // init sex
-  const vipsexv = $("#vipsexv").val();
-  if (vipsexv != null || vipsexv != "") {
-    $("#VipSex").val(vipsexv);
-  }
-
-  // init invoice
-  const InvoiceType = $("#InvoiceType").val();
-  if (InvoiceType != null || InvoiceType != "") {
-    $("input[name=invoice][value='" + InvoiceType + "']").attr("checked", true);
-  }
-
-  // init PaymentMethod
-  const paymentmethodv = $("#paymentmethodv").val();
-  if (paymentmethodv != null || paymentmethodv != "") {
-    // console.log(paymentmethodv);
-    $("#PaymentMethod").val(paymentmethodv);
-  }
-
-  // init driverbday
+  //init driverbday
   date_factory("driverbday_y", "driverbday_m", "driverbday_d");
-  const driverbdayv_y = $("#driverbdayv_y").val();
-  const driverbdayv_m = $("#driverbdayv_m").val();
-  const driverbdayv_d = $("#driverbdayv_d").val();
-  if (driverbdayv_y != null || driverbdayv_y != "") {
-    $("#driverbday_y").val(driverbdayv_y);
-    $("#driverbday_m").val(driverbdayv_m);
-    updateNumberOfDays("driverbday_y", "driverbday_m", "driverbday_d");
-    $("#driverbday_d").val(driverbdayv_d);
-  }
 
-  // init pickerbday
+  //init pickerbday
   date_factory("pickerbday_y", "pickerbday_m", "pickerbday_d");
-  const pickerbdayv_y = $("#pickerbdayv_y").val();
-  const pickerbdayv_m = $("#pickerbdayv_m").val();
-  const pickerbdayv_d = $("#pickerbdayv_d").val();
-  if (pickerbdayv_y != null || pickerbdayv_y != "") {
-    $("#pickerbday_y").val(pickerbdayv_y);
-    $("#pickerbday_m").val(pickerbdayv_m);
-    updateNumberOfDays("pickerbday_y", "pickerbday_m", "pickerbday_d");
-    $("#pickerbday_d").val(pickerbdayv_d);
-  }
 
-  // init ser_date_st
+  //init ser_date_st
   search_date_factory("ser_date_st_y", "ser_date_st_m", "ser_date_st_d");
 
-  // init ser_date_ed
+  //init ser_date_ed
   search_date_factory("ser_date_ed_y", "ser_date_ed_m", "ser_date_ed_d");
-
-  // init isremindv
-  const isremindv = $("#isremindv").val();
-  if (isremindv != null || isremindv != "") {
-    $("input[name=IsRemind][value='" + isremindv + "']").attr("checked", true);
-  }
-
-  // init istaxrefundv
-  const istaxrefundv = $("#istaxrefundv").val();
-  if (istaxrefundv != null || istaxrefundv != "") {
-    $("input[name=IsTaxRefund][value='" + istaxrefundv + "']").attr(
-      "checked",
-      true
-    );
-  }
 };
 
-// 航班資料
+//航班資料
 const flight_info = () => {
   $("#arrival_box").show();
   $("#departure_box").show();
@@ -832,7 +544,7 @@ const flight_info = () => {
   }
 };
 
-// 航班時間
+//航班時間
 const entrydate_combine = () => {
   const entry_type = $("#entry_type").val();
   const yy = $("#entry_date_y").val();
@@ -860,7 +572,7 @@ const entrydate_combine = () => {
   }
 };
 
-// 航班編號
+//航班編號
 const entryno_combine = () => {
   const entry_type = $("#entry_type").val();
   const deno = $("#DepartureFlightNo").val();
@@ -871,7 +583,7 @@ const entryno_combine = () => {
   }
 };
 
-// 選擇器驗證
+//選擇器驗證
 const select_check = (cur_input, cur_er, cur_title) => {
   const cur = $("#" + cur_input).val();
   if (cur == 0 || cur == null) {
@@ -881,7 +593,7 @@ const select_check = (cur_input, cur_er, cur_title) => {
   }
 };
 
-// 字數驗證
+//字數驗證
 const words_check = (cur_input, exp_num, cur_er, cur_title) => {
   const cur = $("#" + cur_input).val();
   if (cur.length < exp_num) {
@@ -891,16 +603,16 @@ const words_check = (cur_input, exp_num, cur_er, cur_title) => {
   }
 };
 
-// 其他日期合成
+//其他日期合成
 const date_combine = (year, month, day, target) => {
   const yy = $("#" + year).val();
   const mm = $("#" + month).val();
   const dd = $("#" + day).val();
   $("#" + target).val(yy + "/" + mm + "/" + dd);
-  // console.log(target + ": " + $("#" + target).val());
+  //console.log(target + ": " + $("#" + target).val());
 };
 
-// 聯絡人資料
+//聯絡人資料
 const contact_info = () => {
   const re = $("input[name='ContactIsSelf']:checked").val();
   if (re != "N") {
@@ -910,25 +622,25 @@ const contact_info = () => {
   }
 };
 
-// 發票資料
+//發票資料
 const invoice = () => {
   const re = $("input[name='InvoiceType']:checked").val();
   $("#InvoiceType").val(re);
 };
 
-// 免稅商品
+//免稅商品
 const tex_free = () => {
   const re = $("input[name='tex_free']:checked").val();
   $("#IsRemind").val(re);
 };
 
-// 退稅服務
+//退稅服務
 const tex_refund = () => {
   const re = $("input[name='tex_refund']:checked").val();
   $("#IsTaxRefund").val(re);
 };
 
-// 日期產生
+//日期產生
 const date_factory = (years, months, days) => {
   for (i = new Date().getFullYear(); i > 1900; i--) {
     $("#" + years).append($("<option />").val(i).html(i));
@@ -945,7 +657,7 @@ const date_factory = (years, months, days) => {
   }
 };
 
-// 未來日期產生
+//未來日期產生
 const future_date_factory = (years, months, days) => {
   const cur_year = new Date().getFullYear();
   for (i = cur_year; i <= cur_year + 15; i++) {
@@ -963,7 +675,7 @@ const future_date_factory = (years, months, days) => {
   }
 };
 
-// 搜尋日期產生
+//搜尋日期產生
 const search_date_factory = (years, months, days) => {
   const cur_year = new Date().getFullYear();
   for (i = cur_year - 10; i <= cur_year + 10; i++) {
@@ -1001,7 +713,7 @@ const updateNumberOfDays = (years, months, days) => {
   }
 };
 
-// 時間產生
+//時間產生
 const time_factory = (hours, minutes) => {
   for (i = 0; i < 24; i++) {
     i < 10
@@ -1032,13 +744,13 @@ const mobile_check = (cur, cur_er, type) => {
     if (rule_m.test(phone)) {
       $("#" + cur_er).html("");
     } else {
-      $("#" + cur_er).html("請輸入正確的行動電話號碼格式");
+      $("#" + cur_er).html("請輸入正確的電話號碼");
     }
   } else if (type == "t") {
     if (rule_t.test(phone)) {
       $("#" + cur_er).html("");
     } else {
-      $("#" + cur_er).html("請輸入正確的電話號碼格式");
+      $("#" + cur_er).html("請輸入正確的電話號碼");
     }
   }
 };
@@ -1134,17 +846,4 @@ const checkPid = (id) => {
   }
   if (sum % 10 != 0) return false;
   return true;
-};
-
-const cus_submit = () => {
-  id_check("IdentityId", "IdentityId_er");
-  words_check("fullName", 2, "fullName_er", "完整姓名");
-  words_check("cardFront6", 6, "cardFront6_er", "卡號前6碼");
-  words_check("cardBack4", 4, "cardBack4_er", "卡號後4碼");
-  const IdentityId = $("#IdentityId_er").html().length;
-  const fullName = $("#fullName_er").html().length;
-  const cardFront6 = $("#cardFront6_er").html().length;
-  const cardBack4 = $("#cardBack4_er").html().length;
-  const verify = IdentityId + fullName + cardFront6 + cardBack4;
-  return verify;
 };
